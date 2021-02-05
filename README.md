@@ -1,6 +1,7 @@
 # expense_manager
 
-A new Flutter application.
+This is a flutter application to maintain and pen down expenditure on a day-to-day basis.
+
 
 ## Getting Started
 
