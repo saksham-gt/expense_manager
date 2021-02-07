@@ -50,6 +50,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   List<Transaction> _userTransactions = [];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -93,8 +95,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         });
   }
 
-  bool _showVal = false;
-
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
   @override
   dispose() {
-    print('Listener is dispised!!');
+    print('Listener is disposed!!');
     print('Now the state is $State');
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -123,15 +123,15 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         children: <Widget>[
           Text('Show Chart'),
           Switch(
-              value: _showVal,
+              value: _showChart,
               onChanged: (val) {
                 setState(() {
-                  _showVal = val;
+                  _showChart = val;
                 });
               })
         ],
       ),
-      _showVal
+      _showChart
           ? Container(
               height: (MediaQuery.of(context).size.height -
                       appBar.preferredSize.height -
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             if (isLandscape)
-              ..._buildLandscapeContent(appBar, _showVal, txListWidget),
+              ..._buildLandscapeContent(appBar, _showChart, txListWidget),
             if (!isLandscape) ..._buildPortraitContent(appBar, txListWidget),
           ],
         ),
