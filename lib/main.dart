@@ -7,8 +7,14 @@ import './models/transaction.dart';
 import './widgets/chart.dart';
 
 void main() {
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight
+  ]);
+
   runApp(MyApp());
 }
 
@@ -18,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Expense Manager',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           accentColor: Colors.deepOrangeAccent,
           fontFamily: 'Quicksand',
@@ -131,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
               })
         ],
       ),
-      _showChart
+      _showChart == false
           ? Container(
               height: (MediaQuery.of(context).size.height -
                       appBar.preferredSize.height -
